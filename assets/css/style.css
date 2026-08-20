@@ -305,13 +305,13 @@ h1, h2, h3, h4, h5, h6 {
   gap: 10px;
   font-size: 1.6rem;
   font-weight: 800;
-  color: var(--text);
+  color: var(--primary) !important;
 }
 
 .navbar-brand .brand-icon {
   width: 42px;
   height: 42px;
-  background: var(--gradient-primary);
+  background: var(--primary);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1367,7 +1367,27 @@ select.form-control {
 
 .footer-brand .navbar-brand {
   margin-bottom: 16px;
-  color: white;
+  color: var(--primary) !important;
+}
+
+/* Brand consistency: the WeDent logo mark and name use the exact same
+   high-contrast primary color in both light and dark themes. */
+.navbar-brand,
+.navbar-brand:visited,
+.footer-brand .navbar-brand,
+.footer-brand .navbar-brand:visited {
+  color: var(--primary) !important;
+}
+
+.navbar-brand .brand-icon,
+.footer-brand .navbar-brand .brand-icon {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .navbar-brand,
+[data-theme="dark"] .footer-brand .navbar-brand {
+  color: var(--primary) !important;
 }
 
 .footer-brand p {
