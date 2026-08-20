@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Plans | WeDent Dental Clinic</title>
+  <meta name="description" content="WeDent dental clinic pricing plans – affordable, transparent, and flexible options for every smile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <div class="preloader"><div class="loader"></div></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon"><i class="fas fa-tooth"></i></div>
+        WeDent
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-dropdown">
+          <a href="index.html" class="nav-link">Home</a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1</a>
+            <a href="index-2.html" class="dropdown-item">Home 2</a>
+          </div>
+        </li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button class="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <button class="rtl-toggle" aria-label="Toggle RTL">RTL</button>
+        <a href="contact.html" class="btn btn-primary btn-sm" style="text-decoration:none;white-space:nowrap;"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+        <button class="mobile-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header-bg" style="background-image:url('assets/images/hero-pricing.webp');" data-reveal>
+    <div class="container">
+      <h1>Pricing Plans</h1>
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="separator"><i class="fas fa-chevron-right"></i></span>
+        <span class="current">Pricing</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Pricing Section -->
+  <section class="section pricing-section" id="pricing">
+    <div class="container">
+
+      <!-- Pricing Toggle -->
+      <div class="pricing-toggle-wrapper" data-reveal>
+        <span class="toggle-label active" id="monthlyLabel">Monthly</span>
+        <label class="pricing-toggle">
+          <input type="checkbox" id="pricingToggle" />
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="toggle-label" id="annualLabel">Annual <span class="badge-save">Save 20%</span></span>
+      </div>
+
+      <!-- Pricing Grid -->
+      <div class="pricing-grid">
+
+        <!-- Basic Plan -->
+        <div class="pricing-card glass-card" data-reveal>
+          <div class="pricing-card-header">
+            <h3 class="plan-name">Basic Plan</h3>
+            <p class="plan-description">Perfect for routine dental care</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="99" data-annual="79">99</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <ul class="plan-features">
+            <li class="included"><i class="fas fa-check"></i> General Checkup</li>
+            <li class="included"><i class="fas fa-check"></i> Dental Cleaning</li>
+            <li class="included"><i class="fas fa-check"></i> X-Ray</li>
+            <li class="included"><i class="fas fa-check"></i> Basic Consultation</li>
+            <li class="included"><i class="fas fa-check"></i> 10% Off on Treatments</li>
+            <li class="excluded"><i class="fas fa-times"></i> Teeth Whitening</li>
+            <li class="excluded"><i class="fas fa-times"></i> Priority Scheduling</li>
+            <li class="excluded"><i class="fas fa-times"></i> Emergency Visits</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline btn-block">Get Started</a>
+        </div>
+
+        <!-- Premium Plan (Featured) -->
+        <div class="pricing-card glass-card featured" data-reveal>
+          <div class="featured-badge">Most Popular</div>
+          <div class="pricing-card-header">
+            <h3 class="plan-name">Premium Plan</h3>
+            <p class="plan-description">Best value for comprehensive care</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="199" data-annual="159">199</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <ul class="plan-features">
+            <li class="included"><i class="fas fa-check"></i> Everything in Basic</li>
+            <li class="included"><i class="fas fa-check"></i> Teeth Whitening</li>
+            <li class="included"><i class="fas fa-check"></i> Orthodontic Consult</li>
+            <li class="included"><i class="fas fa-check"></i> Priority Scheduling</li>
+            <li class="included"><i class="fas fa-check"></i> 20% Off on Treatments</li>
+            <li class="included"><i class="fas fa-check"></i> Free Emergency Visits</li>
+            <li class="excluded"><i class="fas fa-times"></i> Dental Implants Consult</li>
+            <li class="excluded"><i class="fas fa-times"></i> VIP Lounge Access</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary btn-block">Get Started</a>
+        </div>
+
+        <!-- Elite Plan -->
+        <div class="pricing-card glass-card" data-reveal>
+          <div class="pricing-card-header">
+            <h3 class="plan-name">Elite Plan</h3>
+            <p class="plan-description">The ultimate dental experience</p>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount" data-monthly="349" data-annual="279">349</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <ul class="plan-features">
+            <li class="included"><i class="fas fa-check"></i> Everything in Premium</li>
+            <li class="included"><i class="fas fa-check"></i> Dental Implants Consult</li>
+            <li class="included"><i class="fas fa-check"></i> Full Mouth Restoration</li>
+            <li class="included"><i class="fas fa-check"></i> VIP Lounge Access</li>
+            <li class="included"><i class="fas fa-check"></i> 30% Off on Treatments</li>
+            <li class="included"><i class="fas fa-check"></i> Family Coverage</li>
+            <li class="excluded"><i class="fas fa-times"></i> Home Visits</li>
+            <li class="excluded"><i class="fas fa-times"></i> 24/7 Hotline</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline btn-block">Get Started</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about our pricing and services</p>
+      </div>
+
+      <div class="faq-list" data-reveal>
+
+        <div class="faq-item glass-card">
+          <button class="faq-question" aria-expanded="false">
+            <span>How are the pricing plans structured?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Our pricing plans are structured as monthly subscriptions that cover a bundle of preventive and restorative dental services. Each plan tier builds on the previous one, adding more advanced treatments and exclusive perks. You can choose to pay monthly or switch to annual billing to save 20%.</p>
+          </div>
+        </div>
+
+        <div class="faq-item glass-card">
+          <button class="faq-question" aria-expanded="false">
+            <span>Do you accept dental insurance?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, WeDent accepts most major dental insurance plans. Our front desk team will verify your benefits before your first visit and handle all insurance claims on your behalf. If you have a pricing plan subscription, insurance benefits can still be applied to any additional treatments not covered by your plan.</p>
+          </div>
+        </div>
+
+        <div class="faq-item glass-card">
+          <button class="faq-question" aria-expanded="false">
+            <span>Are there flexible payment plans available?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutely. We offer flexible interest-free payment plans for treatments that exceed your plan coverage. You can split the cost into monthly installments over 6 or 12 months with zero interest. We also partner with leading healthcare financing providers for extended payment options.</p>
+          </div>
+        </div>
+
+        <div class="faq-item glass-card">
+          <button class="faq-question" aria-expanded="false">
+            <span>What is the cancellation policy?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>You can cancel or downgrade your plan at any time with no cancellation fees. Monthly plans end at the close of the current billing cycle. Annual plans can be cancelled with a prorated refund for the remaining months. We also offer a 30-day satisfaction guarantee for all new subscribers.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section cta-section" id="cta">
+    <div class="container" data-reveal>
+      <div class="cta-content glass-card">
+        <h2>Ready to Start Your Smile Journey?</h2>
+        <p>Book your free consultation today and discover which plan is right for you.</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary">
+            <i class="fas fa-calendar-check"></i> Book Free Consultation
+          </a>
+          <a href="tel:+1234567890" class="btn btn-outline">
+            <i class="fas fa-phone"></i> Call Us Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo">
+            <i class="fas fa-tooth"></i>
+            <span>WeDent</span>
+          </a>
+          <p>Your trusted partner in dental health. Providing exceptional care with a gentle touch since 2010.</p>
+          <div class="social-links">
+            <a href="https://facebook.com/wedent" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com/wedent" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/wedent" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com/company/wedent" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#general">General Dentistry</a></li>
+            <li><a href="services.html#cosmetic">Cosmetic Dentistry</a></li>
+            <li><a href="services.html#orthodontics">Orthodontics</a></li>
+            <li><a href="services.html#implants">Dental Implants</a></li>
+            <li><a href="services.html#whitening">Teeth Whitening</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Dental Avenue, Suite 100</li>
+            <li><i class="fas fa-phone"></i> +1 (234) 567-890</li>
+            <li><i class="fas fa-envelope"></i> info@wedent.com</li>
+            <li><i class="fas fa-clock"></i> Mon-Fri: 8AM - 6PM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 WeDent Dental Clinic. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

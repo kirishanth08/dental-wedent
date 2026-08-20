@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeDent Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary, #0f172a);
+      color: var(--text-primary, #e2e8f0);
+      min-height: 100vh;
+    }
+
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .admin-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--surface-solid, rgba(30, 41, 59, 0.95));
+      border-right: 1px solid rgba(148, 163, 184, 0.1);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .sidebar-brand .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary, #3b82f6), var(--primary-dark, #2563eb));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .sidebar-brand h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary, #e2e8f0);
+      letter-spacing: -0.5px;
+    }
+
+    .sidebar-brand span {
+      color: var(--primary, #3b82f6);
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted, #64748b);
+      padding: 12px 20px 8px;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      color: var(--text-secondary, #94a3b8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-nav a i {
+      width: 20px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .sidebar-nav a:hover {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--primary, #3b82f6);
+    }
+
+    .sidebar-nav a.active {
+      background: var(--primary, #3b82f6);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .sidebar-nav a .badge {
+      margin-left: auto;
+      background: var(--danger, #ef4444);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .sidebar-footer a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      color: var(--danger, #ef4444);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-footer a:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Main Content */
+    .admin-main {
+      margin-left: 260px;
+      flex: 1;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    /* Top Bar */
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-solid, rgba(30, 41, 59, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      border-radius: 16px;
+      padding: 16px 24px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(20px);
+    }
+
+    .topbar-left h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary, #e2e8f0);
+    }
+
+    .topbar-left p {
+      font-size: 13px;
+      color: var(--text-muted, #64748b);
+      margin-top: 2px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topbar-search {
+      position: relative;
+    }
+
+    .topbar-search input {
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 10px;
+      padding: 10px 16px 10px 40px;
+      color: var(--text-primary, #e2e8f0);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      width: 280px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .topbar-search input::placeholder {
+      color: var(--text-muted, #64748b);
+    }
+
+    .topbar-search input:focus {
+      border-color: var(--primary, #3b82f6);
+    }
+
+    .topbar-search i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted, #64748b);
+      font-size: 14px;
+    }
+
+    .topbar-icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      background: rgba(148, 163, 184, 0.08);
+      color: var(--text-secondary, #94a3b8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+      font-size: 16px;
+    }
+
+    .topbar-icon-btn:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--primary, #3b82f6);
+      color: var(--primary, #3b82f6);
+    }
+
+    .topbar-icon-btn .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--danger, #ef4444);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--surface-solid, rgba(30, 41, 59, 0.95));
+    }
+
+    .topbar-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .topbar-profile:hover {
+      background: rgba(148, 163, 184, 0.08);
+    }
+
+    .topbar-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary, #3b82f6), #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .topbar-profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar-profile-info .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary, #e2e8f0);
+    }
+
+    .topbar-profile-info .role {
+      font-size: 12px;
+      color: var(--text-muted, #64748b);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--surface-solid, rgba(30, 41, 59, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-info .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary, #e2e8f0);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-info .stat-label {
+      font-size: 14px;
+      color: var(--text-muted, #64748b);
+      font-weight: 500;
+    }
+
+    .stat-info .stat-change {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .stat-change.positive {
+      color: #22c55e;
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .stat-change.negative {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+
+    .stat-icon.green {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+
+    .stat-icon.purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #8b5cf6;
+    }
+
+    .stat-icon.pink {
+      background: rgba(236, 72, 153, 0.15);
+      color: #ec4899;
+    }
+
+    /* Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    /* Glass Card */
+    .glass-card {
+      background: var(--surface-solid, rgba(30, 41, 59, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+    }
+
+    .glass-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .glass-card-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary, #e2e8f0);
+    }
+
+    .glass-card-header a {
+      font-size: 13px;
+      color: var(--primary, #3b82f6);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .glass-card-header a:hover {
+      text-decoration: underline;
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 12px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .admin-table thead th {
+      text-align: left;
+      padding: 14px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted, #64748b);
+      background: rgba(148, 163, 184, 0.06);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      white-space: nowrap;
+    }
+
+    .admin-table tbody td {
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--text-secondary, #94a3b8);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+      white-space: nowrap;
+    }
+
+    .admin-table tbody tr:nth-child(even) {
+      background: rgba(148, 163, 184, 0.03);
+    }
+
+    .admin-table tbody tr:hover {
+      background: rgba(59, 130, 246, 0.04);
+    }
+
+    .admin-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .patient-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .patient-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .patient-name {
+      font-weight: 500;
+      color: var(--text-primary, #e2e8f0);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-badge.confirmed {
+      background: rgba(34, 197, 94, 0.12);
+      color: #22c55e;
+    }
+
+    .status-badge.confirmed::before {
+      background: #22c55e;
+    }
+
+    .status-badge.pending {
+      background: rgba(250, 204, 21, 0.12);
+      color: #facc15;
+    }
+
+    .status-badge.pending::before {
+      background: #facc15;
+    }
+
+    .status-badge.completed {
+      background: rgba(59, 130, 246, 0.12);
+      color: #3b82f6;
+    }
+
+    .status-badge.completed::before {
+      background: #3b82f6;
+    }
+
+    .status-badge.cancelled {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .status-badge.cancelled::before {
+      background: #ef4444;
+    }
+
+    .status-badge.in-progress {
+      background: rgba(139, 92, 246, 0.12);
+      color: #8b5cf6;
+    }
+
+    .status-badge.in-progress::before {
+      background: #8b5cf6;
+    }
+
+    /* Action Buttons */
+    .action-btns {
+      display: flex;
+      gap: 6px;
+    }
+
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      background: transparent;
+      color: var(--text-muted, #64748b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      border-color: var(--primary, #3b82f6);
+      color: var(--primary, #3b82f6);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .action-btn.danger:hover {
+      border-color: var(--danger, #ef4444);
+      color: var(--danger, #ef4444);
+      background: rgba(239, 68, 68, 0.08);
+    }
+
+    /* Chart Placeholder */
+    .chart-placeholder {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted, #64748b);
+      border: 2px dashed rgba(148, 163, 184, 0.15);
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .chart-placeholder i {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    .chart-placeholder p {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .quick-action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(148, 163, 184, 0.04);
+      color: var(--text-secondary, #94a3b8);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .quick-action-btn:hover {
+      border-color: var(--primary, #3b82f6);
+      color: var(--primary, #3b82f6);
+      background: rgba(59, 130, 246, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .quick-action-btn i {
+      font-size: 22px;
+    }
+
+    /* Full Width Section */
+    .full-width-section {
+      margin-bottom: 30px;
+    }
+
+    /* Activity Feed */
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .activity-item:first-child {
+      padding-top: 0;
+    }
+
+    .activity-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .activity-icon.blue {
+      background: rgba(59, 130, 246, 0.12);
+      color: #3b82f6;
+    }
+
+    .activity-icon.green {
+      background: rgba(34, 197, 94, 0.12);
+      color: #22c55e;
+    }
+
+    .activity-icon.purple {
+      background: rgba(139, 92, 246, 0.12);
+      color: #8b5cf6;
+    }
+
+    .activity-icon.orange {
+      background: rgba(249, 115, 22, 0.12);
+      color: #f97316;
+    }
+
+    .activity-icon.pink {
+      background: rgba(236, 72, 153, 0.12);
+      color: #ec4899;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-content p {
+      font-size: 14px;
+      color: var(--text-secondary, #94a3b8);
+      line-height: 1.5;
+    }
+
+    .activity-content p strong {
+      color: var(--text-primary, #e2e8f0);
+      font-weight: 600;
+    }
+
+    .activity-content .activity-time {
+      font-size: 12px;
+      color: var(--text-muted, #64748b);
+      margin-top: 4px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary, #3b82f6);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark, #2563eb);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .admin-main {
+        margin-left: 0;
+        padding: 20px 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-topbar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .topbar-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .topbar-search input {
+        width: 100%;
+      }
+
+      .mobile-menu-btn {
+        display: flex !important;
+      }
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      background: rgba(148, 163, 184, 0.08);
+      color: var(--text-secondary, #94a3b8);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="fas fa-tooth"></i>
+        </div>
+        <h2>We<span>Dent</span> Admin</h2>
+      </div>
+
+      <nav class="sidebar-nav">
+        <span class="sidebar-nav-label">Main</span>
+        <a href="#" class="active">
+          <i class="fas fa-chart-pie"></i>
+          Dashboard
+        </a>
+        <a href="#">
+          <i class="fas fa-calendar-check"></i>
+          Appointments
+          <span class="badge">12</span>
+        </a>
+        <a href="#">
+          <i class="fas fa-users"></i>
+          Patients
+        </a>
+        <a href="#">
+          <i class="fas fa-user-md"></i>
+          Doctors
+        </a>
+
+        <span class="sidebar-nav-label">Content</span>
+        <a href="#">
+          <i class="fas fa-tooth"></i>
+          Services
+        </a>
+        <a href="#">
+          <i class="fas fa-newspaper"></i>
+          Blog
+        </a>
+
+        <span class="sidebar-nav-label">Communication</span>
+        <a href="#">
+          <i class="fas fa-envelope"></i>
+          Messages
+          <span class="badge">5</span>
+        </a>
+        <a href="#">
+          <i class="fas fa-cog"></i>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      <!-- Top Bar -->
+      <div class="admin-topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1>Dashboard</h1>
+          <p>Welcome back, Admin. Here's your clinic overview.</p>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search patients, appointments...">
+          </div>
+          <button class="topbar-icon-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="topbar-profile">
+            <div class="topbar-avatar">AD</div>
+            <div class="topbar-profile-info">
+              <span class="name">Admin User</span>
+              <span class="role">Super Admin</span>
+            </div>
+            <i class="fas fa-chevron-down" style="font-size: 12px; color: var(--text-muted, #64748b);"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-value">2,845</div>
+            <div class="stat-label">Total Appointments</div>
+            <span class="stat-change positive">
+              <i class="fas fa-arrow-up"></i> 12.5% from last month
+            </span>
+          </div>
+          <div class="stat-icon blue">
+            <i class="fas fa-calendar"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-value">856</div>
+            <div class="stat-label">New Patients</div>
+            <span class="stat-change positive">
+              <i class="fas fa-arrow-up"></i> 8.2% from last month
+            </span>
+          </div>
+          <div class="stat-icon green">
+            <i class="fas fa-user-plus"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-value">$124,500</div>
+            <div class="stat-label">Revenue</div>
+            <span class="stat-change positive">
+              <i class="fas fa-arrow-up"></i> 5.3% from last month
+            </span>
+          </div>
+          <div class="stat-icon purple">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Patient Satisfaction</div>
+            <span class="stat-change negative">
+              <i class="fas fa-arrow-down"></i> 0.5% from last month
+            </span>
+          </div>
+          <div class="stat-icon pink">
+            <i class="fas fa-heart"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Grid: Recent Appointments + Sidebar Widgets -->
+      <div class="content-grid">
+        <!-- Recent Appointments Table -->
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h3>Recent Appointments</h3>
+            <a href="#">View All</a>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Patient Name</th>
+                  <th>Service</th>
+                  <th>Doctor</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">SJ</div>
+                      <span class="patient-name">Sarah Johnson</span>
+                    </div>
+                  </td>
+                  <td>Teeth Cleaning</td>
+                  <td>Dr. Michael Chen</td>
+                  <td>Jan 15, 2026</td>
+                  <td><span class="status-badge confirmed">Confirmed</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);">JR</div>
+                      <span class="patient-name">James Rodriguez</span>
+                    </div>
+                  </td>
+                  <td>Root Canal</td>
+                  <td>Dr. Emily Watson</td>
+                  <td>Jan 15, 2026</td>
+                  <td><span class="status-badge in-progress">In Progress</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #f97316, #ea580c);">EM</div>
+                      <span class="patient-name">Emily Martinez</span>
+                    </div>
+                  </td>
+                  <td>Dental Implant</td>
+                  <td>Dr. Michael Chen</td>
+                  <td>Jan 14, 2026</td>
+                  <td><span class="status-badge completed">Completed</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">DP</div>
+                      <span class="patient-name">David Park</span>
+                    </div>
+                  </td>
+                  <td>Teeth Whitening</td>
+                  <td>Dr. Emily Watson</td>
+                  <td>Jan 14, 2026</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777);">LW</div>
+                      <span class="patient-name">Lisa Williams</span>
+                    </div>
+                  </td>
+                  <td>Dental Filling</td>
+                  <td>Dr. Robert Kim</td>
+                  <td>Jan 13, 2026</td>
+                  <td><span class="status-badge cancelled">Cancelled</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right Sidebar Widgets -->
+        <div class="right-widgets">
+          <!-- Chart Placeholder -->
+          <div class="glass-card" style="margin-bottom: 24px;">
+            <div class="glass-card-header">
+              <h3>Patient Demographics</h3>
+              <a href="#">Details</a>
+            </div>
+            <div class="chart-placeholder">
+              <i class="fas fa-chart-bar"></i>
+              <p>Chart Area</p>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="glass-card">
+            <div class="glass-card-header">
+              <h3>Quick Actions</h3>
+            </div>
+            <div class="quick-actions">
+              <a href="#" class="quick-action-btn">
+                <i class="fas fa-calendar-plus"></i>
+                New Appointment
+              </a>
+              <a href="#" class="quick-action-btn">
+                <i class="fas fa-user-plus"></i>
+                Add Patient
+              </a>
+              <a href="#" class="quick-action-btn">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+              </a>
+              <a href="#" class="quick-action-btn">
+                <i class="fas fa-file-alt"></i>
+                Generate Report
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full-Width Appointments Table -->
+      <div class="full-width-section">
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h3>All Appointments</h3>
+            <a href="#">Export CSV</a>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Contact</th>
+                  <th>Service</th>
+                  <th>Doctor</th>
+                  <th>Date & Time</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">SJ</div>
+                      <span class="patient-name">Sarah Johnson</span>
+                    </div>
+                  </td>
+                  <td>(555) 123-4567</td>
+                  <td>Teeth Cleaning</td>
+                  <td>Dr. Michael Chen</td>
+                  <td>Jan 15, 2026 &bull; 09:00 AM</td>
+                  <td><span class="status-badge confirmed">Confirmed</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);">JR</div>
+                      <span class="patient-name">James Rodriguez</span>
+                    </div>
+                  </td>
+                  <td>(555) 234-5678</td>
+                  <td>Root Canal</td>
+                  <td>Dr. Emily Watson</td>
+                  <td>Jan 15, 2026 &bull; 10:30 AM</td>
+                  <td><span class="status-badge in-progress">In Progress</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #f97316, #ea580c);">EM</div>
+                      <span class="patient-name">Emily Martinez</span>
+                    </div>
+                  </td>
+                  <td>(555) 345-6789</td>
+                  <td>Dental Implant</td>
+                  <td>Dr. Michael Chen</td>
+                  <td>Jan 14, 2026 &bull; 02:00 PM</td>
+                  <td><span class="status-badge completed">Completed</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">DP</div>
+                      <span class="patient-name">David Park</span>
+                    </div>
+                  </td>
+                  <td>(555) 456-7890</td>
+                  <td>Teeth Whitening</td>
+                  <td>Dr. Emily Watson</td>
+                  <td>Jan 14, 2026 &bull; 11:00 AM</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #ec4899, #db2777);">LW</div>
+                      <span class="patient-name">Lisa Williams</span>
+                    </div>
+                  </td>
+                  <td>(555) 567-8901</td>
+                  <td>Dental Filling</td>
+                  <td>Dr. Robert Kim</td>
+                  <td>Jan 13, 2026 &bull; 03:30 PM</td>
+                  <td><span class="status-badge cancelled">Cancelled</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="patient-cell">
+                      <div class="patient-avatar" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">AT</div>
+                      <span class="patient-name">Amanda Thompson</span>
+                    </div>
+                  </td>
+                  <td>(555) 678-9012</td>
+                  <td>Orthodontic Consultation</td>
+                  <td>Dr. Robert Kim</td>
+                  <td>Jan 13, 2026 &bull; 09:15 AM</td>
+                  <td><span class="status-badge confirmed">Confirmed</span></td>
+                  <td>
+                    <div class="action-btns">
+                      <button class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                      <button class="action-btn" title="Edit"><i class="fas fa-pen"></i></button>
+                      <button class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="full-width-section">
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h3>Recent Activity</h3>
+            <a href="#">View All</a>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon blue">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>Sarah Johnson</strong> booked a teeth cleaning appointment with <strong>Dr. Michael Chen</strong> for Jan 15, 2026.</p>
+                <span class="activity-time">2 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon green">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <div class="activity-content">
+                <p>New patient <strong>Amanda Thompson</strong> registered and completed intake forms.</p>
+                <span class="activity-time">4 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon purple">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>Emily Martinez</strong> completed dental implant procedure with <strong>Dr. Michael Chen</strong>.</p>
+                <span class="activity-time">6 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon orange">
+                <i class="fas fa-comment-dots"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>David Park</strong> sent a message requesting to reschedule his teeth whitening appointment.</p>
+                <span class="activity-time">8 hours ago</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon pink">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="activity-content">
+                <p><strong>Lisa Williams</strong> left a 5-star review: "Excellent service and very friendly staff!"</p>
+                <span class="activity-time">1 day ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const adminSidebar = document.getElementById('adminSidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', function () {
+        adminSidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('active');
+      });
+    }
+
+    if (sidebarOverlay) {
+      sidebarOverlay.addEventListener('click', function () {
+        adminSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+      });
+    }
+  </script>
+</body>
+</html>
