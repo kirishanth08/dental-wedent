@@ -58,25 +58,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.querySelector('.navbar-nav');
 
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
+    const closeMobileMenu = () => {
+      mobileToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      navMenu.querySelectorAll('.nav-dropdown.open').forEach(item => item.classList.remove('open'));
+    };
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navMenu.classList.toggle('active');
+      mobileToggle.classList.toggle('active', isOpen);
     });
+
+    navMenu.addEventListener('click', (e) => e.stopPropagation());
 
     navMenu.querySelectorAll('.nav-dropdown > .nav-link').forEach(link => {
       link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 1100) {
           e.preventDefault();
-          link.closest('.nav-dropdown').classList.toggle('open');
+          const dropdown = link.closest('.nav-dropdown');
+          const wasOpen = dropdown.classList.contains('open');
+          navMenu.querySelectorAll('.nav-dropdown.open').forEach(item => item.classList.remove('open'));
+          if (!wasOpen) dropdown.classList.add('open');
         }
       });
     });
 
-    navMenu.querySelectorAll('.dropdown-item').forEach(link => {
+    navMenu.querySelectorAll('.dropdown-item, .nav-link:not(.nav-dropdown > .nav-link)').forEach(link => {
       link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+        if (window.innerWidth <= 768) closeMobileMenu();
       });
+    });
+
+    // Close the mobile menu whenever the user clicks anywhere outside it.
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && navMenu.classList.contains('active') &&
+          !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Keep the menu state clean when returning to desktop width.
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) closeMobileMenu();
     });
   }
 
