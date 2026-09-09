@@ -301,4 +301,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // --- Quick Booking Date Init ---
+  const heroDate = document.getElementById('hero-date');
+  if (heroDate) {
+    const today = new Date().toISOString().split('T')[0];
+    heroDate.min = today;
+    if (!heroDate.value) heroDate.value = today;
+  }
 });

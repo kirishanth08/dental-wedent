@@ -69,97 +69,137 @@
     <section class="hero section">
       <div class="container">
         <div class="hero-content reveal">
-          <h1 class="hero-title">Your Smile,<br><span class="highlight">Our Priority</span></h1>
+          <span class="section-label" style="margin-bottom:16px;"><i class="fas fa-shield-heart"></i> Board-Certified Clinical Team</span>
+          <h1 class="hero-title">Exceptional Dental Care,<br><span class="highlight">Gentle Human Touch</span></h1>
           <p class="hero-description">
-            Experience world-class dental care with our team of expert professionals.
-            We combine advanced technology with gentle hands to give you the
-            healthiest, brightest smile you deserve.
+            Experience hospital-grade clinical precision with personalized family warmth.
+            Our certified dental specialists combine advanced 3D digital imaging with gentle hands
+            to protect and perfect your smile.
           </p>
           <div class="hero-buttons">
-            <a href="contact.html" class="btn btn-primary btn-lg">Book Appointment</a>
-            <a href="services.html" class="btn btn-outline btn-lg">Our Services</a>
+            <a href="contact.html" class="btn btn-primary btn-lg"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+            <a href="services.html" class="btn btn-outline btn-lg">Explore All Services</a>
           </div>
           <div class="hero-stats">
             <div class="hero-stat">
               <span class="stat-number" data-count="15" data-suffix="+">0+</span>
-              <span class="stat-label">Years Experience</span>
+              <span class="stat-label">Years of Care</span>
             </div>
             <div class="hero-stat">
               <span class="stat-number" data-count="10000" data-suffix="+">0+</span>
-              <span class="stat-label">Happy Patients</span>
+              <span class="stat-label">Happy Smiles</span>
             </div>
             <div class="hero-stat">
-              <span class="stat-number" data-count="50" data-suffix="+">0+</span>
-              <span class="stat-label">Expert Dentists</span>
+              <span class="stat-number" data-count="99" data-suffix="%">0%</span>
+              <span class="stat-label">Satisfaction Rate</span>
             </div>
           </div>
         </div>
 
         <div class="hero-visual reveal">
           <div class="hero-image-wrapper home1-hero-image">
-            <img src="assets/images/home1.webp" alt="Dentist providing professional dental care" style="width:100%;height:100%;object-fit:cover;">
+            <img src="assets/images/home1-hero.jpg" alt="Dentist consulting with adult patient in modern operatory" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="hero-floating-card card-1">
             <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
-            <div class="card-text">Next Appointment</div>
-            <div class="card-subtext">Tomorrow, 10:00 AM</div>
+            <div class="card-text">Next Available</div>
+            <div class="card-subtext">Today &middot; 3 Open Slots</div>
           </div>
           <div class="hero-floating-card card-2">
-            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-            <div class="card-text">98% Success Rate</div>
-            <div class="card-subtext">Patient Satisfaction</div>
+            <div class="card-icon"><i class="fas fa-award"></i></div>
+            <div class="card-text">Top-Rated Clinic</div>
+            <div class="card-subtext">★ 4.9 (500+ Patient Reviews)</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Patient Experience Section -->
+    <!-- Quick Appointment Booking Dock -->
+    <section class="section" style="padding-top:0;padding-bottom:30px;">
+      <div class="container">
+        <div class="quick-booking-bar reveal">
+          <div class="quick-booking-title">
+            <i class="fas fa-calendar-plus"></i>
+            <span>Quick Appointment Booking &mdash; Instant Confirmation</span>
+          </div>
+          <form action="contact.html" method="get" class="booking-form-grid">
+            <div class="booking-field">
+              <label for="hero-service">Select Treatment</label>
+              <select id="hero-service" name="service" class="form-control" required>
+                <option value="cleaning">Preventive Teeth Cleaning</option>
+                <option value="whitening">In-Office Teeth Whitening</option>
+                <option value="implants">Titanium Dental Implants</option>
+                <option value="orthodontics">Clear Aligners &amp; Braces</option>
+                <option value="emergency">Emergency Dental Relief</option>
+              </select>
+            </div>
+            <div class="booking-field date-input-wrap">
+              <label for="hero-date">Preferred Date</label>
+              <input type="date" id="hero-date" name="date" class="form-control" required>
+            </div>
+            <div class="booking-field">
+              <label for="hero-time">Preferred Time Slot</label>
+              <select id="hero-time" name="time" class="form-control">
+                <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
+                <option value="afternoon">Afternoon (12:00 PM - 4:00 PM)</option>
+                <option value="evening">Evening (4:00 PM - 7:00 PM)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-magnifying-glass"></i> Find Available Slot
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clinical Safety & Patient Experience Section -->
     <section class="section">
       <div class="container">
         <div class="section-center">
-          <span class="section-label reveal"><i class="fas fa-heart-pulse"></i> Your Visit</span>
-          <h2 class="section-title reveal delay-1">A Better Dental Visit From Start to Finish</h2>
-          <p class="section-subtitle reveal delay-2">Thoughtful care, clear communication, and practical support at every stage of your appointment.</p>
+          <span class="section-label reveal"><i class="fas fa-shield-heart"></i> Patient Safety Guarantee</span>
+          <h2 class="section-title reveal delay-1">Hospital-Grade Standards for Every Smile</h2>
+          <p class="section-subtitle reveal delay-2">We adhere to the most stringent sterilization, modern digital diagnostics, and gentle treatment protocols.</p>
         </div>
         <div class="features-grid home1-feature-grid">
           <article class="feature-card feature-image-card glass reveal delay-1">
             <div class="feature-card-image">
-              <img src="assets/images/service-1.webp" alt="Patient scheduling a dental appointment">
+              <img src="assets/images/home1-feature-hygiene.jpg" alt="Hospital-Grade Sterilization operatory">
             </div>
             <div class="feature-card-content">
-              <span class="feature-card-kicker">Getting Started</span>
-              <h3>Easy Appointment Planning</h3>
-              <p>Choose a convenient appointment time and arrive knowing exactly what to expect from your visit.</p>
+              <span class="feature-card-kicker">Clinical Hygiene</span>
+              <h3>Class-B Autoclave Sterilization</h3>
+              <p>Every clinical instrument undergoes multi-stage hospital-grade autoclaving and vacuum sealing before use.</p>
             </div>
           </article>
           <article class="feature-card feature-image-card glass reveal delay-2">
             <div class="feature-card-image">
-              <img src="assets/images/doctor-2.webp" alt="Dentist discussing treatment with a patient">
+              <img src="assets/images/home1-feature-tech.jpg" alt="Low-Radiation 3D Digital Intraoral Scanner">
             </div>
             <div class="feature-card-content">
-              <span class="feature-card-kicker">Personalized Care</span>
-              <h3>Care Built Around You</h3>
-              <p>We listen to your concerns and shape recommendations around your oral health needs and priorities.</p>
+              <span class="feature-card-kicker">Digital Diagnostics</span>
+              <h3>Low-Radiation 3D Imaging</h3>
+              <p>Ultra-accurate digital intraoral mapping and panoramic scans deliver high resolution with 80% less radiation.</p>
             </div>
           </article>
           <article class="feature-card feature-image-card glass reveal delay-3">
             <div class="feature-card-image">
-              <img src="assets/images/service-5.webp" alt="Dental treatment procedure">
+              <img src="assets/images/home1-feature-pediatric.jpg" alt="Gentle family and pediatric dental care">
             </div>
             <div class="feature-card-content">
-              <span class="feature-card-kicker">Clear Guidance</span>
-              <h3>Understand Your Treatment</h3>
-              <p>We explain treatment options in straightforward language so you can make confident decisions.</p>
+              <span class="feature-card-kicker">Family Care</span>
+              <h3>Gentle Dentistry for All Ages</h3>
+              <p>Specialized comfort protocols designed to make visits reassuring and completely anxiety-free for children and adults.</p>
             </div>
           </article>
           <article class="feature-card feature-image-card glass reveal delay-4">
             <div class="feature-card-image">
-              <img src="assets/images/home1-about.webp" alt="Patient receiving supportive dental care">
+              <img src="assets/images/home1-feature-comfort.jpg" alt="Painless local anesthesia and comfort treatment">
             </div>
             <div class="feature-card-content">
-              <span class="feature-card-kicker">Aftercare</span>
-              <h3>Support Beyond the Chair</h3>
-              <p>Practical aftercare guidance helps you protect your results and maintain a healthier smile.</p>
+              <span class="feature-card-kicker">Patient Comfort</span>
+              <h3>Pain-Free Computerized Numbing</h3>
+              <p>Modern micro-anesthetic delivery systems prevent injection discomfort so your treatment remains comfortable.</p>
             </div>
           </article>
         </div>
@@ -171,8 +211,8 @@
       <div class="container">
         <div class="section-center">
           <span class="section-label reveal"><i class="fas fa-teeth"></i> Our Services</span>
-          <h2 class="section-title reveal delay-1">What We Offer</h2>
-          <p class="section-subtitle reveal delay-2">Comprehensive dental solutions tailored to meet every oral health need.</p>
+          <h2 class="section-title reveal delay-1">Comprehensive Dental Care</h2>
+          <p class="section-subtitle reveal delay-2">From preventive maintenance to specialized surgical solutions tailored to your oral health needs.</p>
         </div>
         <div class="services-grid">
           <div class="service-card glass reveal delay-1">
@@ -180,8 +220,8 @@
               <img src="assets/images/service-1.webp" alt="Dental Cleaning" style="width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="service-body">
-              <h3>Dental Cleaning</h3>
-              <p>Professional teeth cleaning and polishing to remove plaque, tartar, and stains for a fresh, healthy smile.</p>
+              <h3>Dental Cleaning &amp; Prevention</h3>
+              <p>Professional teeth cleaning and ultrasonic scaling to remove plaque, tartar, and stains for long-term gum health.</p>
               <a href="service-details-cleaning.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
@@ -190,8 +230,8 @@
               <img src="assets/images/service-2.webp" alt="Teeth Whitening" style="width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="service-body">
-              <h3>Teeth Whitening</h3>
-              <p>Advanced whitening treatments to brighten your teeth by several shades in just one visit.</p>
+              <h3>Laser Teeth Whitening</h3>
+              <p>Safe in-office enamel brightening treatments that lift deep stains by multiple shades in a single comfortable visit.</p>
               <a href="service-details-whitening.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
@@ -200,14 +240,14 @@
               <img src="assets/images/service-3.webp" alt="Dental Implants" style="width:100%;height:100%;object-fit:cover;">
             </div>
             <div class="service-body">
-              <h3>Dental Implants</h3>
-              <p>Permanent, natural-looking tooth replacements that restore your smile and confidence.</p>
+              <h3>Titanium Dental Implants</h3>
+              <p>Permanent, biocompatible tooth replacements that restore natural bite strength, jawbone integrity, and aesthetics.</p>
               <a href="service-details-implants.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
         <div style="text-align:center;margin-top:40px;" class="reveal">
-          <a href="services.html" class="btn btn-primary">View More Services <i class="fas fa-arrow-right"></i></a>
+          <a href="services.html" class="btn btn-primary">View All 6 Clinical Services <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
@@ -216,32 +256,32 @@
     <section class="section">
       <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
         <div class="reveal-left">
-          <img src="assets/images/home1-about.webp" alt="WeDent Clinic" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--border-radius-lg);">
+          <img src="assets/images/home1-about-clinic.jpg" alt="WeDent Clinic modern reception and consultation lounge" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--border-radius-lg);">
         </div>
         <div class="reveal-right">
-          <span class="section-label"><i class="fas fa-info-circle"></i> About Us</span>
-          <h2 class="section-title">Trusted Dental Care Since 2009</h2>
-          <p style="color:var(--text-secondary);margin-bottom:16px;">We have been serving our community with compassionate, high-quality dental care for over 15 years. Our state-of-the-art facility and dedicated team ensure every patient receives personalized treatment plans.</p>
-          <p style="color:var(--text-secondary);margin-bottom:28px;">From routine check-ups to complex procedures, we handle everything under one roof with a focus on comfort and lasting results.</p>
+          <span class="section-label"><i class="fas fa-hospital"></i> Why Choose WeDent</span>
+          <h2 class="section-title">A Higher Standard of Dental Care</h2>
+          <p style="color:var(--text-secondary);margin-bottom:16px;">We have been serving our community with compassionate, high-quality dental care for over 15 years. Our modern reception suites, state-of-the-art operatories, and dedicated clinical team ensure every patient feels at ease.</p>
+          <p style="color:var(--text-secondary);margin-bottom:28px;">From routine preventive cleanings to complex smile reconstructions, our specialists provide comprehensive oral care with transparent pricing and gentle touch.</p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;">
             <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--primary-glass);border-radius:var(--border-radius-sm);border:1px solid var(--primary-glass-border);">
               <i class="fas fa-award" style="color:var(--primary);"></i>
-              <span style="font-weight:600;font-size:0.9rem;">Award-Winning Clinic</span>
+              <span style="font-weight:600;font-size:0.9rem;">ADA Accredited</span>
             </div>
             <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--primary-glass);border-radius:var(--border-radius-sm);border:1px solid var(--primary-glass-border);">
               <i class="fas fa-shield-halved" style="color:var(--primary);"></i>
-              <span style="font-weight:600;font-size:0.9rem;">100% Safe Procedures</span>
+              <span style="font-weight:600;font-size:0.9rem;">100% Sterile Protocols</span>
             </div>
             <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--primary-glass);border-radius:var(--border-radius-sm);border:1px solid var(--primary-glass-border);">
               <i class="fas fa-clock" style="color:var(--primary);"></i>
-              <span style="font-weight:600;font-size:0.9rem;">Flexible Scheduling</span>
+              <span style="font-weight:600;font-size:0.9rem;">Same-Day Emergencies</span>
             </div>
             <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--primary-glass);border-radius:var(--border-radius-sm);border:1px solid var(--primary-glass-border);">
               <i class="fas fa-hand-holding-heart" style="color:var(--primary);"></i>
-              <span style="font-weight:600;font-size:0.9rem;">Gentle & Caring Staff</span>
+              <span style="font-weight:600;font-size:0.9rem;">0% Financing Available</span>
             </div>
           </div>
-          <a href="about.html" class="btn btn-primary">Discover More</a>
+          <a href="about.html" class="btn btn-primary">Discover Our Clinic</a>
         </div>
       </div>
     </section>
